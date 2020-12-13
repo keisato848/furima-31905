@@ -3,14 +3,13 @@
 ## users table
 |Column|Types|Options|
 |-|-|-|
-|email|string|null:false|
-|password|string|null:false|
-|firstname|string|null:false|
+|email|string|null:false, unique: true|
 |nickname|string|null:false|
-|lastname|string|null:false|
+|first_name|string|null:false|
+|last_name|string|null:false|
 |first_kana|string|null:false|
 |last_kana|string|null:false|
-|birth_date|datetime|null:false|
+|birth_date|date|null:false|
 
 ### Association
 - has_many :items
@@ -19,11 +18,14 @@
 ## items table
 |Column|Types|Options|
 |-|-|-|
-|image|references|null:false, foreign_key:true|
 |name|string|null:false|
 |explanation|text|null:false|
 |category|string|null:false|
 |state|text|null:false|
+|delivery_fee|string|null:false|
+|prefecture_id|integer|null:false|
+|date_to_delivery|int|null:false|
+|item_fee|int|null:false|
 |user|references|foreign_key: true|
 
 ### Association
@@ -33,10 +35,8 @@
 ## orders table
 |Column|Types|Options|
 |-|-|-|
-|delivery_fee|string|null:false|
-|region|string|null:false|
-|date_to_derivery|int|null:false|
-|item_fee|int|null:false|
+|state|string|-|
+|status|string|-|
 |user|references|foreign_key: true|
 |item|references|foreign_key: true|
 
@@ -48,16 +48,15 @@
 ## address table
 |Column|Types|Options|
 |-|-|-|
-|postal_code|varchar|null:false|
-|prefectures|string|null:false|
-|cities|string|null:false|
+|postal_code|string|null:false|
+|prefecture_id|integer|null:false|
+|city|string|null:false|
 |address|string|null:false|
 |building_name|string|-|
-|telephone_number|varchar|null:false|
+|telephone_number|string|null:false|
 |user|references|foreign_key: true|
 |item|references|foreign_key: true|
 |order|references|foreign_key: true|
 
 ### Association
-- belongs_to :user
 - belongs_to :order
