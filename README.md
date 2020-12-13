@@ -1,24 +1,62 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users table
+|Column|Types|Options|
+|-|-|-|
+|email|string|null:false, unique: true|
+|nickname|string|null:false|
+|first_name|string|null:false|
+|last_name|string|null:false|
+|first_kana|string|null:false|
+|last_kana|string|null:false|
+|birth_date|date|null:false|
 
-Things you may want to cover:
+### Association
+- has_many :items
+- has_many :orders
 
-* Ruby version
+## items table
+|Column|Types|Options|
+|-|-|-|
+|name|string|null:false|
+|explanation|text|null:false|
+|category|string|null:false|
+|state|text|null:false|
+|delivery_fee|string|null:false|
+|prefecture_id|integer|null:false|
+|date_to_delivery|int|null:false|
+|item_fee|int|null:false|
+|user|references|foreign_key: true|
 
-* System dependencies
+### Association
+- belongs_to :user
+- has_one: orders
 
-* Configuration
+## orders table
+|Column|Types|Options|
+|-|-|-|
+|state|string|-|
+|status|string|-|
+|user|references|foreign_key: true|
+|item|references|foreign_key: true|
 
-* Database creation
+### Association
+- belongs_to :user
+- belongs_to :item
+- has_one :address
 
-* Database initialization
+## address table
+|Column|Types|Options|
+|-|-|-|
+|postal_code|string|null:false|
+|prefecture_id|integer|null:false|
+|city|string|null:false|
+|address|string|null:false|
+|building_name|string|-|
+|telephone_number|string|null:false|
+|user|references|foreign_key: true|
+|item|references|foreign_key: true|
+|order|references|foreign_key: true|
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Association
+- belongs_to :order
