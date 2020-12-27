@@ -9,6 +9,7 @@ class Item < ApplicationRecord
     belongs_to :delivery_day
 
   with_options presence: true do
+    validates :image
     validates :name
     validates :explanation
     validates :item_fee
