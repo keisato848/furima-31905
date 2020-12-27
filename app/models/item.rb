@@ -23,9 +23,11 @@ class Item < ApplicationRecord
     validates :delivery_day_id
   end
 
-  validates :item_fee, :numericality => {
+  validates :item_fee, format: /\A[0-9]+\z/,
+    :numericality => {
     :greater_than_or_equal_to => 300,
     :less_than_or_equal_to => 9999999,
-    :message => '価格は300円から9999999円の範囲で入力してください'
+    :message => 'は300円から9999999円の範囲で入力してください'
   }
+
 end
