@@ -90,7 +90,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Item fee can't be blank", "Item fee is invalid", "Item fee は300円から9999999円の範囲で入力してください")
       end 
       it 'item_feeが300未満だとと出品できない' do
-        @item.item_fee = 200
+        @item.item_fee = 299
         @item.valid?
         expect(@item.errors.full_messages).to include("Item fee は300円から9999999円の範囲で入力してください")
       end 
