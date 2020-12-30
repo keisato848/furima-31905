@@ -1,9 +1,13 @@
-$(function(){
-  $( '#item-price' ).on( 'input', function(){ 
-    let amount = $( this ).val();
-    let fee = Math.ceil(amount * 0.1);
-    let profit = Math.floor(amount * 0.9);
-    $('#add-tax-price').html(fee);
-    $('#profit').html(profit);
-  });
-});
+window.addEventListener("load",()=>{
+
+  const priceInput = document.getElementById("item-price");
+
+  priceInput.addEventListener("input", () => {
+    const inputValue = priceInput.value;
+    const addTaxDom = document.getElementById("add-tax-price")
+    addTaxDom.innerHTML = (Math.floor(inputValue * 0.1));
+     const profitNumber = document.getElementById("profit")
+     const value_result = inputValue * 0.1
+     profitNumber.innerHTML = (Math.floor(inputValue - value_result));
+  })
+})
