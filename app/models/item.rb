@@ -23,6 +23,7 @@ class Item < ApplicationRecord
     validates :delivery_day_id
   end
 
+  validates :name, length: {maximum: 40}
   validates :item_fee, format: /\A[0-9]+\z/,
                        numericality: {
                          greater_than_or_equal_to: 300,
