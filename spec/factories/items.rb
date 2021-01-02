@@ -9,7 +9,5 @@ FactoryBot.define do
     prefecture_id             { 2 }
     shipping_fee_burden_id            { 2 }
     delivery_day_id            { 2 }
-    created_at            { '2020-01-01' }
-    updated_at            { '2020-01-01' }
   end
 end
