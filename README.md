@@ -20,12 +20,12 @@
 |-|-|-|
 |name|string|null:false|
 |explanation|text|null:false|
-|category|string|null:false|
-|state|text|null:false|
-|delivery_fee|string|null:false|
+|category_id|integer|null:false|
+|state_id|integer|null:false|
+|shipping_fee_burden_id|integer|null:false|
 |prefecture_id|integer|null:false|
-|date_to_delivery|int|null:false|
-|item_fee|int|null:false|
+|delivery_id|integer|null:false|
+|item_fee|integer|null:false|
 |user|references|foreign_key: true|
 
 ### Association
