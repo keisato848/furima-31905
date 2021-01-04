@@ -24,9 +24,9 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
       it 'emailは＠を含まなければ登録できない' do
-        @user.email = "testtest.jp"
+        @user.email = 'testtest.jp'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Email is invalid")
+        expect(@user.errors.full_messages).to include('Email is invalid')
       end
       it 'passwordが空だと登録できない' do
         @user.password = ''
@@ -91,54 +91,54 @@ RSpec.describe User, type: :model do
         expect(another_user.errors.full_messages).to include('Email has already been taken')
       end
       it 'last_nameが半角英字では登録できない' do
-        @user.last_name = "test"
+        @user.last_name = 'test'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name に全角文字を使用してください")
+        expect(@user.errors.full_messages).to include('Last name に全角文字を使用してください')
       end
       it 'last_nameが半角数字では登録できない' do
-        @user.last_name = "000000"
+        @user.last_name = '000000'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last name に全角文字を使用してください")
+        expect(@user.errors.full_messages).to include('Last name に全角文字を使用してください')
       end
       it 'first_nameが半角英字では登録できない' do
-        @user.first_name = "test"
+        @user.first_name = 'test'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name に全角文字を使用してください")
+        expect(@user.errors.full_messages).to include('First name に全角文字を使用してください')
       end
       it 'first_nameが半角数字では登録できない' do
-        @user.first_name = "000000"
+        @user.first_name = '000000'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First name に全角文字を使用してください")
+        expect(@user.errors.full_messages).to include('First name に全角文字を使用してください')
       end
       it 'first_kanaが英字では登録できない' do
-        @user.first_kana = "test"
+        @user.first_kana = 'test'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First kana 全角カタカナのみで入力して下さい")
+        expect(@user.errors.full_messages).to include('First kana 全角カタカナのみで入力して下さい')
       end
       it 'first_kanaが漢字では登録できない' do
-        @user.first_kana = "山田"
+        @user.first_kana = '山田'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First kana 全角カタカナのみで入力して下さい")
+        expect(@user.errors.full_messages).to include('First kana 全角カタカナのみで入力して下さい')
       end
       it 'first_kanaが数字では登録できない' do
-        @user.first_kana = "00000"
+        @user.first_kana = '00000'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First kana 全角カタカナのみで入力して下さい")
+        expect(@user.errors.full_messages).to include('First kana 全角カタカナのみで入力して下さい')
       end
       it 'last_kanaが英字では登録できない' do
-        @user.last_kana = "test"
+        @user.last_kana = 'test'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last kana 全角カタカナのみで入力して下さい")
+        expect(@user.errors.full_messages).to include('Last kana 全角カタカナのみで入力して下さい')
       end
       it 'last_kanaが漢字では登録できない' do
-        @user.last_kana = "山田"
+        @user.last_kana = '山田'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last kana 全角カタカナのみで入力して下さい")
+        expect(@user.errors.full_messages).to include('Last kana 全角カタカナのみで入力して下さい')
       end
       it 'last_kanaが数字では登録できない' do
-        @user.last_kana = "000000"
+        @user.last_kana = '000000'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Last kana 全角カタカナのみで入力して下さい")
+        expect(@user.errors.full_messages).to include('Last kana 全角カタカナのみで入力して下さい')
       end
     end
   end
