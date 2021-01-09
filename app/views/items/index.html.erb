@@ -131,7 +131,7 @@
           <li class='list'>
             <%= link_to item_path(item.id) do %>
               <div class='item-img-content'>
-                <%= link_to image_tag(item.image, class: "item-img"), item_path(item.id) %>
+                <%= image_tag item.image, class: "item-img" %>
                   <%# 購入済の場合に表示 %>
                   <%# <div class='sold-out'> %>
                     <%# <span>Sold Out!!</span> %>
