@@ -5,5 +5,5 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
   root 'items#index'
-  resources :items, except: [:update, :destroy]
+  resources :items, except: [:destroy]
 end
