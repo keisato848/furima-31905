@@ -35,8 +35,6 @@
 ## orders table
 |Column|Types|Options|
 |-|-|-|
-|state|string|-|
-|status|string|-|
 |user|references|foreign_key: true|
 |item|references|foreign_key: true|
 
