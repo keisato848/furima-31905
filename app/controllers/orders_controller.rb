@@ -8,11 +8,11 @@ class OrdersController < ApplicationController
   def index
     @order_address = OrderAddress.new
   end
-  
+
   def create
     @order_address = OrderAddress.new(order_params)
     if @order_address.valid?
-      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
       Payjp::Charge.create(
         amount: @item.item_fee,
         card: @order_address.token,
@@ -25,8 +25,8 @@ class OrdersController < ApplicationController
     end
   end
 
-
   private
+
   def find_item
     @item = Item.find(params[:item_id])
   end
@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
 
   def expect_seller
     find_item
-    redirect_to root_path unless current_user.id =! @item.user_id
+    redirect_to root_path unless current_user.id = !@item.user_id
   end
 
   def expect_sold_out
@@ -46,7 +46,8 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order_address).permit(:postal_code, :prefecture_id, :city, :address, :building_name, :telephone_number).merge(token: params[:token], user_id: current_user.id, item_id: @item.id)
+    params.require(:order_address).permit(:postal_code, :prefecture_id, :city, :address, :building_name, :telephone_number).merge(
+      token: params[:token], user_id: current_user.id, item_id: @item.id
+    )
   end
-
 end
