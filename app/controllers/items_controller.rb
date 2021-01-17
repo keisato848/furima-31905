@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.order(id: 'DESC')
+    @order = Order.find_by(item_id: @items.ids)
   end
 
   def new
