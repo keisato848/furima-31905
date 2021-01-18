@@ -5,6 +5,7 @@ RSpec.describe OrderAddress, type: :model do
     @user = create(:user)
     @item = create(:item)
     @order_address = build(:order_address, user_id: @user.id, item_id: @item.id)
+    sleep 0.1
   end
 
   describe '商品購入' do
