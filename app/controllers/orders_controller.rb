@@ -1,7 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :find_item
-  before_action :redirect_root
   before_action :expect_seller
   before_action :expect_sold_out
 
@@ -12,12 +11,7 @@ class OrdersController < ApplicationController
   def create
     @order_address = OrderAddress.new(order_params)
     if @order_address.valid?
-      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-      Payjp::Charge.create(
-        amount: @item.item_fee,
-        card: @order_address.token,
-        currency: 'jpy'
-      )
+      pay_item
       @order_address.save
       redirect_to root_path
     else
@@ -31,17 +25,11 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
-  def redirect_root
-    redirect_to root_path unless user_signed_in?
-  end
-
   def expect_seller
-    find_item
-    redirect_to root_path unless current_user.id = !@item.user_id
+    redirect_to root_path if current_user.id == @item.user_id
   end
 
   def expect_sold_out
-    find_item
     redirect_to root_path if Order.find_by(item_id: @item.id)
   end
 
@@ -50,4 +38,14 @@ class OrdersController < ApplicationController
       token: params[:token], user_id: current_user.id, item_id: @item.id
     )
   end
+
+def pay_item
+  Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+  Payjp::Charge.create(
+    amount: @item.item_fee,
+    card: @order_address.token,
+    currency: 'jpy'
+  )
+end
+
 end

@@ -3,14 +3,17 @@ require 'rails_helper'
 RSpec.describe OrderAddress, type: :model do
   before do
     @user = create(:user)
-    @item = build(:item)
-    @item.image = fixture_file_upload('/files/test.jpg')
-    @order_address = FactoryBot.build(:order_address)
+    @item = create(:item)
+    @order_address = build(:order_address, user_id: @user.id, item_id: @item.id)
   end
 
   describe '商品購入' do
     context '商品が購入できるとき' do
+      it '全ての値を正しく入力すれば購入できる' do
+        expect(@order_address).to be_valid
+      end
       it 'building_nameを除く全ての値を正しく入力すれば購入できる' do
+        @order_address.building_name = nil
         expect(@order_address).to be_valid
       end
     end
@@ -70,12 +73,22 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Telephone number can't be blank")
       end
-      it 'telephone_numberは-を含まなければ購入できない' do
-        @order_address.telephone_number = '09012345678'
+      it 'telephone_numberは-を含むと購入できない' do
+        @order_address.telephone_number = '090-1234-5678'
         @order_address.valid?
-        binding.pry
         expect(@order_address.errors.full_messages).to include('Telephone number is invalid')
       end
+      it 'telephone_numberが英数混合では購入できない' do
+        @order_address.telephone_number = 'abcde12345'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Telephone number is invalid')
+      end
+      it 'telephone_numberが12桁以上では購入できない' do
+        @order_address.telephone_number = '090123456789'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Telephone number is invalid')
+      end
+
       it 'user_idがなければ購入できない' do
         @order_address.user_id = nil
         @order_address.valid?

@@ -133,7 +133,7 @@
               <div class='item-img-content'>
                 <%= image_tag item.image, class: "item-img" %>
                   <%# 購入済の場合に表示 %>
-                  <% if item.id == @order.item_id %>
+                  <% if Order.exists?(id: item.id) %>
                   <div class='sold-out'>
                     <span>Sold Out!!</span>
                   </div>
