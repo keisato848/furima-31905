@@ -5,7 +5,6 @@ RSpec.describe Item, type: :model do
     @user = create(:user)
     user = @user
     @item = build(:item)
-    @item.image = fixture_file_upload('/files/test.jpg')
   end
 
   describe '商品出品' do
